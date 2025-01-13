@@ -83,6 +83,14 @@
                 .join(' x ');
         }
 
+        function isPrime(num) {
+            if (num <= 1) return false;
+            for (let i = 2; i <= Math.sqrt(num); i++) {
+                if (num % i === 0) return false;
+            }
+            return true;
+        }
+
         document.getElementById('factorForm').addEventListener('submit', function (e) {
             e.preventDefault();
 
@@ -92,6 +100,17 @@
 
             if (!Number.isInteger(num) || num <= 0 || num > 1000000) {
                 output.innerHTML = `<p class="error">Invalid input. Please enter a positive integer less than or equal to 1,000,000.</p>`;
+                return;
+            }
+
+            if (isPrime(num)) {
+                output.innerHTML = `
+                    <p><strong>Number:</strong> ${num}</p>
+                    <p><strong>Status:</strong> The number is a prime number.</p>
+                    <p><strong>Positive Factors:</strong> 1, ${num}</p>
+                    <p><strong>Number of Positive Factors:</strong> 2</p>
+                    <p><strong>Prime Factorization:</strong> ${num}^1</p>
+                `;
                 return;
             }
 
